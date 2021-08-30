@@ -7,3 +7,11 @@ To write JS in order to create a password generator
 *HTML
 *CSS
 *Javasript
+
+## Website
+https://btantillo.github.io/Password-Generator/
+
+## Snapshot
+
+## Contribution
+Made with ❤️ by Ben Tantillo

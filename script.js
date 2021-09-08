@@ -1,19 +1,78 @@
 // Assignment code here
-var Numbers = "0123456789"
-var Letters = "abcdefghijklmnopqrstuvwxyz"
-var Randoms = "!@#$%^<>?/"
-var Confirm;
-var Smalls;
-var Big;
-var Numeric;
-var Characters;
-var uppercaseLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+var Numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+var Letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+var Randoms = [
+  '@',
+  '%',
+  '+',
+  '\\',
+  '/',
+  "'",
+  '!',
+  '#',
+  '$',
+  '^',
+  '?',
+  ':',
+  ',',
+  ')',
+  '(',
+  '}',
+  '{',
+  ']',
+  '[',
+  '~',
+  '-',
+  '_',
+  '.',
+]
+// var Confirm;
+// var Smalls;
+// var Big;
+// var Numeric;
+// var Characters;
+var uppercaseLetters = [
+  'A',
+  'B',
+  'C',
+  'D',
+  'E',
+  'F',
+  'G',
+  'H',
+  'I',
+  'J',
+  'K',
+  'L',
+  'M',
+  'N',
+  'O',
+  'P',
+  'Q',
+  'R',
+  'S',
+  'T',
+  'U',
+  'V',
+  'W',
+  'X',
+  'Y',
+  'Z',
+];
 var passwordCriteria = "";
 
-
+var thePassword = [];
+var potentialCharacters = [];
 
 
 // Get references to the #generate element
+
+// Function to get random element from array
+function randomCharacters(array){
+  var index = Math.floor(Math.random()* array.length)
+  var randomElement = array[index]
+  return randomElement
+}
 
 
 // Write password to the #password input
@@ -37,57 +96,36 @@ function generatePassword() {
 
     if (Smalls === false && Big === false && Numeric === false && Characters ===false) {
     window.alert("Please confirm one or all of the password requirements!")
-    passwordWords();
-  } else if (Smalls && Big && Numeric && Characters) {
-      var passwordCriteria = Numbers + Letters + Randoms + uppercaseLetters
-    }
-    else if (Smalls === true && Big === false && Numeric === false && Characters ===false) {
-      var passwordCriteria = Letters
-    }
-    else if (Smalls === true && Big === true && Numeric === false && Characters ===false) {
-    var passwordCriteria = Letters + uppercaseLetters
-    }
-    else if (Smalls === true && Big === true && Numeric === true && Characters ===false) {
-      var passwordCriteria = Letters + uppercaseLetters + Numbers
-    }
-    else if (Smalls === true && Big === false && Numeric === true && Characters ===false) {
-      var passwordCriteria = Letters + Numbers
-    }
-    else if (Smalls === true && Big === false && Numeric === false && Characters === true) {
-      var passwordCriteria = Letters + Randoms
-    }
-    else if (Smalls === false && Big === true && Numeric === false && Characters ===false){
-    var passwordCriteria = uppercaseLetters
-    }
-    else if (Smalls === false && Big === true && Numeric === true && Characters ===false){
-    var passwordCriteria = uppercaseLetters + Numbers 
-    }
-    else if (Smalls === false && Big === true && Numeric === true && Characters === true) {
-      var passwordCriteria = uppercaseLetters + Numbers + Randoms
-    }
-    else if (Smalls === false && Big === false && Numeric === true && Characters ===false) {
-      var passwordCriteria = Numbers
-    }
-    else if (Smalls === false && Big === false && Numeric === true && Characters === true) {
-      var passwordCriteria = Numbers + Randoms
-    }
-    else if (Smalls === true && Big === false && Numeric === true && Characters === true) {
-      var passwordCriteria = Letters + Numbers + Randoms
-    }
-    else if (Smalls === false && Big === false && Numeric === false && Characters === true) {
-      var passwordCriteria = Randoms
-    }
+    passwordWords(); }
 
-    console.log(passwordCriteria);
-    
-  
+      if (Smalls === true){
+        thePassword.push(randomCharacters(Letters))
+        potentialCharacters = potentialCharacters.concat(Letters)
+      }
+
+      if (Big === true){
+        thePassword.push(randomCharacters(uppercaseLetters))
+        potentialCharacters = potentialCharacters.concat(uppercaseLetters)
+      }
+
+      if (Numeric === true){
+        thePassword.push(randomCharacters(Numbers))
+        potentialCharacters = potentialCharacters.concat(Numbers)
+      }
+
+      if (Characters === true){
+        thePassword.push(randomCharacters(Randoms))
+        potentialCharacters = potentialCharacters.concat(Randoms)
+      }
+    console.log(potentialCharacters)
+    var passwordLength = Confirm - thePassword.length
+    for (var i = 0; i < passwordLength; i++) {
+      var randomCharacter = randomCharacters(potentialCharacters)
+      thePassword.push(randomCharacter)
+    }
   };
-
-var myPassword = ""; 
-for (var i = 0; i < Confirm; i++) {
-  myPassword = myPassword + passwordCriteria[Math.floor(Math.random() * passwordCriteria.length)];
-}
-return myPassword;
+  return thePassword.join("")
+  
 
 };
 
